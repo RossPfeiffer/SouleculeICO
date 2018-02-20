@@ -1,16 +1,16 @@
 pragma solidity ^ 0.4 .18;
 /*
+
           ,/i.
         ,'/ __`.
       ,'_/_  _ _`.
     ,'__/_ ___ _  `.
   ,'_  /___ __ _ __ `.
  '-.._/___...-"-.-..__`.
-In faith of the mysterious
 
 Soulecule Gems. A no-bullshit, transparent, self-sustaining pyramid scheme ICO.
  
-Forked from EthPyramid 0x2fa0ac498d01632f959d3c18e38f4390b005e200#code
+Forked from EthPyramid 0x2fa0ac498d01632f959d3c18e38f4390b005e200
 SaPoWHshi http://test.jochen-hoenicke.de/eth/ponzitoken/
 
 */
@@ -21,24 +21,24 @@ contract SoulPyramid{
     int constant crr_n = 1; // CRR numerator
     int constant crr_d = 2; // CRR denominator
     int constant price_coeff = -0x296ABF784A358468C;
-    string constant public name = "Soulcoin Gem";
-    string constant public symbol = "SOULGEM";
+    string constant public name = "Soulecule Pyramid";
+    string constant public symbol = "SOULPYR";
     uint8 constant public decimals = 18;
     mapping(address => uint256) public tokenBalance;
     mapping(address => int256) public payouts;
     uint256 public totalSupply;
     int256 totalPayouts;
-    SouleculeGems private souleculeGems;
-
     uint256 earningsPerToken;
     uint256 public contractBalance;
+	gemsToken souleculeGemsSource;
 
-    function SoulPyramid() public {
-    	souleculeGems = new SouleculeGems();
+    
+    function SoulPyramid() public{
+    	souleculeGemsSource = new gemsToken();
     }
 	
-	function generateSoul(uint _value, address _wallet) internal {
-		souleculeGems.generateSoul( _value, _wallet);
+	function createSoul(uint _value, address _wallet) internal {
+		souleculeGemsSource.generateSoul(_value, _wallet);
 	}
     
     function totalSupply() constant returns(uint _totalSupply) {
@@ -96,7 +96,7 @@ contract SoulPyramid{
 
     function sellMyTokens() public {
         var balance = balanceOf(msg.sender);
-        generateSoul(balance, msg.sender);
+        //createSoul(balance, msg.sender);
         sell(balance);
     }
 
@@ -312,20 +312,23 @@ contract SoulPyramid{
 
 
 
-contract SouleculeGems {
+contract gemsToken {
 	string constant public name = "Soul Gem";
-	string constant public symbol = "SOUL";
+	string constant public symbol = "SOULGEM";
 	uint8 constant public decimals = 18;
 
 	uint private __totalSupply = 0;
     mapping (address => uint) private __balanceOf;
     mapping (address => mapping (address => uint)) private __allowances;
     
-	function SouleculeGems() public {}
+	function gemsToken(){
+    }
+
     function totalSupply() constant returns (uint _totalSupply) {
         _totalSupply = __totalSupply;
     }
-	function generateSoul(uint _value, address _wallet) private {
+
+	function generateSoul(uint _value, address _wallet) public {
 		__balanceOf[_wallet] += _value;
 		__totalSupply += _value;
 	}
