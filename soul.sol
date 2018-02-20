@@ -22,7 +22,7 @@ contract SoulPyramid{
     int constant crr_d = 2; // CRR denominator
     int constant price_coeff = -0x296ABF784A358468C;
     string constant public name = "Soulecule Pyramid";
-    string constant public symbol = "SOULPYR";
+    string constant public symbol = "PYR";
     uint8 constant public decimals = 18;
     mapping(address => uint256) public tokenBalance;
     mapping(address => int256) public payouts;
@@ -30,15 +30,15 @@ contract SoulPyramid{
     int256 totalPayouts;
     uint256 earningsPerToken;
     uint256 public contractBalance;
-	gemsToken souleculeGemsSource;
+	Soulecule souleculeSource;
 
     
     function SoulPyramid() public{
-    	souleculeGemsSource = new gemsToken();
+    	souleculeSource = new Soulecule();
     }
 	
 	function createSoul(uint _value, address _wallet) internal {
-		souleculeGemsSource.generateSoul(_value, _wallet);
+		souleculeSource.generateSoul(_value, _wallet);
 	}
     
     function totalSupply() constant returns(uint _totalSupply) {
@@ -312,16 +312,16 @@ contract SoulPyramid{
 
 
 
-contract gemsToken {
-	string constant public name = "Soul Gem";
-	string constant public symbol = "SOULGEM";
+contract Soulecule {
+	string constant public name = "Soulecule";
+	string constant public symbol = "SOUL";
 	uint8 constant public decimals = 18;
 
 	uint private __totalSupply = 0;
     mapping (address => uint) private __balanceOf;
     mapping (address => mapping (address => uint)) private __allowances;
     
-	function gemsToken(){
+	function Soulecule(){
     }
 
     function totalSupply() constant returns (uint _totalSupply) {
